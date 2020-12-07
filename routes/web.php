@@ -40,7 +40,8 @@ Route::group([
     'middleware' => 'redirect', 
 ], function(){
     Route::get('/', 'HomeController@index')->name('home');
-    Route::get('show', 'HomeController@index')->name('home');
+    Route::get('home', 'HomeController@index')->name('home.index');
+    Route::post('home/search', 'HomeController@search')->name('home.search');
 
     Route::get('categories/{cate_slug}', 'CategoryController@showCateBySlug')->name('categories.showCateBySlug');
     Route::get('product-details/{product_slug}', 'ProductController@showProductDetails')->name('products.showProductDetails');

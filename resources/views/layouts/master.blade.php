@@ -121,7 +121,11 @@
                     </div>
                     <div class="col-sm-3">
                         <div class="search_box pull-right">
-                            <input type="text" placeholder="@lang('master.search')" />
+                            <form action="{{ route('home.search') }}" method="POST">
+                                {{ csrf_field() }}
+                                <input name="search_home" type="text" placeholder="@lang('master.search')" />
+                                <button type="submit" class="btn btn-warning"><i class="fa fa-search"></i></button>
+                            </form>
                         </div>
                     </div>
                 </div>

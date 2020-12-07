@@ -72,4 +72,19 @@ class Product extends Model
             $query->where([['cate_slug', $cate_slug], ['cate_status', $cate_status]]); });
     }
 
+    public function scopeSearchProduct($query, $searchText, $product_status, $cate_status)
+    {
+        return $query->with('category')->where([
+            ['product_status', $product_status], 
+            ['product_name', 'LIKE', '%'.$searchText.'%'],
+        ])
+        ->orWhere('product_desc', 'LIKE', '%'.$searchText.'%')
+        ->orWhereHas('category', function($query) use ($searchText){
+            $query->where('cate_name', 'LIKE', '%'.$searchText.'%');
+        })
+        ->whereHas('category', function($query) use ($cate_status){
+            $query->where('cate_status', $cate_status);
+        });
+    }
+
 }
